@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Olla verde petróleo con tres hilos de vapor, sobre fondo mango. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- vapor -->
+    <path android:strokeColor="#FF0F5257" android:strokeWidth="3.5" android:strokeLineCap="round" android:fillColor="#00000000" android:pathData="M44,40C41,36 47,34 44,30" />
+    <path android:strokeColor="#FF0F5257" android:strokeWidth="3.5" android:strokeLineCap="round" android:fillColor="#00000000" android:pathData="M54,40C51,36 57,34 54,30" />
+    <path android:strokeColor="#FF0F5257" android:strokeWidth="3.5" android:strokeLineCap="round" android:fillColor="#00000000" android:pathData="M64,40C61,36 67,34 64,30" />
+    <!-- tapa -->
+    <path android:fillColor="#FF0F5257" android:pathData="M33,49L75,49A3,3 0,0,0 75,43L33,43A3,3 0,0,0 33,49Z" />
+    <!-- olla -->
+    <path android:fillColor="#FF0F5257" android:pathData="M36,51L72,51L72,68A9,9 0,0,1 63,77L45,77A9,9 0,0,1 36,68Z" />
+    <!-- asas -->
+    <path android:strokeColor="#FF0F5257" android:strokeWidth="4" android:strokeLineCap="round" android:fillColor="#00000000" android:pathData="M36,56L30,56" />
+    <path android:strokeColor="#FF0F5257" android:strokeWidth="4" android:strokeLineCap="round" android:fillColor="#00000000" android:pathData="M72,56L78,56" />
+    <!-- brillo mango en la olla -->
+    <path android:fillColor="#FFFFE7A8" android:pathData="M43,58L49,58A1.5,1.5 0,0,1 49,61L43,61A1.5,1.5 0,0,1 43,58Z" />
+</vector>

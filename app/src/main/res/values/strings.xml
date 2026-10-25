@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChefYa</string>
+
+    <string name="tab_home">Inicio</string>
+    <string name="tab_recipes">Recetas</string>
+    <string name="tab_shopping">Compras</string>
+    <string name="tab_settings">Ajustes</string>
+
+    <string name="greeting_morning">Buenos días</string>
+    <string name="greeting_afternoon">Buenas tardes</string>
+    <string name="greeting_evening">Buenas noches</string>
+    <string name="hero_title">Muéstrame tu nevera y te digo qué cocinar</string>
+    <string name="photo_button">Tomar foto</string>
+    <string name="photo_button_sub">La IA reconoce lo que tienes</string>
+    <string name="photo_soon">La foto con IA llega en la próxima versión. Por ahora escribe lo que tienes.</string>
+
+    <string name="pantry_empty_title">¿Qué tienes en la cocina?</string>
+    <string name="pantry_title">Tienes %1$d cosas</string>
+    <string name="pantry_add_hint">Escribe un ingrediente: huevos, arroz…</string>
+    <string name="pantry_empty_hint">Agrega dos o tres cosas que tengas y te muestro qué puedes cocinar. Sal, aceite y agua ya los doy por hechos.</string>
+    <string name="can_cook">Puedes cocinar</string>
+    <string name="see_all">Ver todas</string>
+    <string name="no_matches">Con eso todavía no sale una receta. Agrega algo más, como arroz, huevos o tomate.</string>
+
+    <string name="minutes">%1$d min</string>
+    <string name="match_ready">Tienes todo · usa %1$d de tus cosas</string>
+    <string name="match_missing">Te falta: %1$s</string>
+    <string name="add">Agregar</string>
+    <string name="remove_item">Quitar %1$s</string>
+
+    <string name="recipes_title">Recetas</string>
+    <string name="recipes_sub">Caseras, de 30 minutos o menos. Primero las que puedes hacer con lo que tienes.</string>
+
+    <string name="back">Volver</string>
+    <string name="recipe_missing">No encontré esta receta.</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="optional">Si tienes: %1$s</string>
+    <string name="staple">de la despensa</string>
+    <string name="missing">falta</string>
+    <string name="add_missing">Agregar a Compras lo que falta (%1$d)</string>
+    <string name="already_in_shopping">Lo que falta ya está en Compras</string>
+    <string name="added_to_shopping">Listo, está en Compras</string>
+    <string name="steps">Preparación</string>
+
+    <string name="shopping_title">Compras</string>
+    <string name="shopping_sub">Marca lo que compraste y pasa directo a tu cocina.</string>
+    <string name="shopping_add_hint">Agregar a la lista…</string>
+    <string name="shopping_empty">Tu lista está vacía. Desde una receta puedes agregar lo que te falta.</string>
+
+    <string name="theme">Tema</string>
+    <string name="theme_system">Como el teléfono</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="plan">Tu plan</string>
+    <string name="plan_free">Gratis</string>
+    <string name="plan_pro">ChefYa Pro</string>
+    <string name="plan_free_detail">Gratis: %1$d foto y %2$d recetas con IA al día, con anuncios. Las recetas de la app no tienen límite.</string>
+    <string name="plan_pro_detail">Pro: fotos y recetas ilimitadas, menú semanal y lista de compras automática, por %1$s USD al mes o %2$s USD al año.</string>
+    <string name="kitchen">Tu cocina</string>
+    <string name="kitchen_detail">Lo que anotas se guarda solo en este teléfono.</string>
+    <string name="pantry_clear">Vaciar mi cocina</string>
+    <string name="pantry_cleared">Tu cocina quedó vacía</string>
+    <string name="about">Acerca de</string>
+    <string name="version">Versión %1$s</string>
+    <string name="made_by">Hecho por lacosta.agency</string>
+</resources>
