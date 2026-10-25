@@ -35,6 +35,10 @@ data class KitchenState(
 /** Una sola vista de la cocina para todas las pantallas: son pocas y comparten los mismos datos. */
 class ChefYaViewModel(private val kitchen: KitchenRepository) : ViewModel() {
 
+    init {
+        launch { kitchen.upgradeKeys() }
+    }
+
     val state: StateFlow<KitchenState> =
         combine(kitchen.pantry, kitchen.shopping, kitchen.settings) { pantryKeys, shoppingKeys, settings ->
             val known = pantryKeys.filterTo(HashSet()) { !it.startsWith(PantryItem.CUSTOM_PREFIX) }

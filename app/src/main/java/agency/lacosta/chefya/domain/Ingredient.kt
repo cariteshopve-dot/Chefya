@@ -3,13 +3,15 @@ package agency.lacosta.chefya.domain
 /**
  * Un ingrediente que la app conoce. [aliases] son otros nombres del mismo ingrediente en
  * distintos países (caraotas, frijoles, porotos...). Los de [staple] se dan por hechos en
- * cualquier cocina y nunca salen como "te falta".
+ * cualquier cocina y nunca salen como "te falta". Los de [seasoning] (cebolla, ajo, tomate...)
+ * dan sabor pero no deciden el plato: tener cebolla no basta para sugerir una sopa de lentejas.
  */
 data class Ingredient(
     val id: String,
     val name: Text,
     val aliases: List<String> = emptyList(),
     val staple: Boolean = false,
+    val seasoning: Boolean = false,
 )
 
 /** Lo que hay en la nevera: un ingrediente conocido o algo escrito a mano que la app no reconoce. */
@@ -27,9 +29,12 @@ sealed interface PantryItem {
     companion object {
         const val CUSTOM_PREFIX = "custom:"
 
-        /** Lo inverso de [key]: lo que se guardó en el teléfono vuelve a ser un ingrediente. */
+        /**
+         * Lo inverso de [key]: lo que se guardó en el teléfono vuelve a ser un ingrediente. Algo
+         * escrito a mano que una versión nueva ya reconoce pasa a ser el ingrediente conocido.
+         */
         fun fromKey(key: String): PantryItem? = when {
-            key.startsWith(CUSTOM_PREFIX) -> key.removePrefix(CUSTOM_PREFIX).takeIf { it.isNotBlank() }?.let(::Custom)
+            key.startsWith(CUSTOM_PREFIX) -> fromInput(key.removePrefix(CUSTOM_PREFIX))
             else -> Ingredients.byId(key)?.let(::Known)
         }
 

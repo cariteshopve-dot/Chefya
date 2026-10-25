@@ -20,4 +20,7 @@ data class Suggestion(
     val missing: List<String>,
 ) {
     val ready: Boolean get() = missing.isEmpty()
+
+    /** Lo que falta que sí define el plato; la sazón que falta no cuenta aquí. */
+    val missingMain: List<String> get() = missing.filterNot(Ingredients::isSeasoning)
 }

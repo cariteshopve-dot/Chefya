@@ -43,14 +43,17 @@ import agency.lacosta.chefya.ui.ingredientLabel
 import agency.lacosta.chefya.ui.localized
 import agency.lacosta.chefya.ui.theme.ChefYa
 
-/** Un ingrediente como ficha blanca con borde de papel; con [onRemove] lleva una X para quitarlo. */
+/**
+ * Un ingrediente como ficha blanca con borde de papel; con [onRemove] lleva una X para quitarlo.
+ * Si la app no lo reconoce ([unknown]) la ficha va transparente con borde más marcado.
+ */
 @Composable
-fun IngredientChip(label: String, onRemove: (() -> Unit)? = null, onClick: (() -> Unit)? = null) {
+fun IngredientChip(label: String, onRemove: (() -> Unit)? = null, onClick: (() -> Unit)? = null, unknown: Boolean = false) {
     val colors = ChefYa.colors
     Surface(
         shape = RoundedCornerShape(12.dp),
-        color = colors.chip,
-        border = BorderStroke(1.dp, colors.chipEdge),
+        color = if (unknown) Color.Transparent else colors.chip,
+        border = if (unknown) BorderStroke(1.5.dp, colors.dash) else BorderStroke(1.dp, colors.chipEdge),
         modifier = if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier,
     ) {
         Row(

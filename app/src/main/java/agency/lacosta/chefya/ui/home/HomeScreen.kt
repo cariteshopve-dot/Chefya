@@ -73,8 +73,16 @@ fun HomeScreen(
                 if (state.pantry.isNotEmpty()) {
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         state.pantry.sortedBy { it.label(lang).lowercase() }.forEach { item ->
-                            IngredientChip(item.label(), onRemove = { onRemove(item) })
+                            IngredientChip(item.label(), onRemove = { onRemove(item) }, unknown = item is PantryItem.Custom)
                         }
+                    }
+                    val unknown = state.pantry.filterIsInstance<PantryItem.Custom>()
+                    if (unknown.isNotEmpty()) {
+                        Text(
+                            stringResource(R.string.unknown_items, unknown.joinToString(", ") { it.label }),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
                     }
                 }
                 AddIngredientField(
@@ -89,6 +97,8 @@ fun HomeScreen(
         }
 
         if (state.pantry.isNotEmpty()) {
+            val ready = state.suggestions.filter { it.missingMain.isEmpty() }
+            val almost = state.suggestions.filter { it.missingMain.isNotEmpty() }
             item {
                 Row(
                     Modifier.fillMaxWidth().padding(start = 18.dp, end = 8.dp, top = 8.dp),
@@ -98,10 +108,15 @@ fun HomeScreen(
                     TextButton(onClick = onSeeAll) { Text(stringResource(R.string.see_all)) }
                 }
             }
-            if (state.suggestions.isEmpty()) {
-                item { Hint(stringResource(R.string.no_matches)) }
-            } else {
-                items(state.suggestions.take(HOME_RECIPES), key = { it.recipe.id }) { suggestion ->
+            if (ready.isEmpty()) {
+                item { Hint(stringResource(if (almost.isEmpty()) R.string.no_matches else R.string.no_ready)) }
+            }
+            items(ready.take(HOME_RECIPES), key = { it.recipe.id }) { suggestion ->
+                RecipeCard(suggestion, onClick = { onOpenRecipe(suggestion.recipe.id) }, modifier = Modifier.padding(horizontal = 18.dp))
+            }
+            if (almost.isNotEmpty()) {
+                item { Section(stringResource(R.string.buy_one_more)) }
+                items(almost.take(HOME_RECIPES), key = { it.recipe.id }) { suggestion ->
                     RecipeCard(suggestion, onClick = { onOpenRecipe(suggestion.recipe.id) }, modifier = Modifier.padding(horizontal = 18.dp))
                 }
             }

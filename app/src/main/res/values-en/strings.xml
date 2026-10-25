@@ -19,7 +19,11 @@
     <string name="pantry_empty_hint">Add two or three things you have and I\'ll show you what you can cook. Salt, oil and water are a given.</string>
     <string name="can_cook">You can cook</string>
     <string name="see_all">See all</string>
-    <string name="no_matches">No recipe fits that yet. Add something else, like rice, eggs or tomato.</string>
+    <string name="no_matches">No recipe fits that yet. Add a main ingredient, like rice, eggs, chicken or beans.</string>
+
+    <string name="no_ready">You\'re still missing something for a full dish. See below what\'s worth buying.</string>
+    <string name="buy_one_more">If you get one more thing</string>
+    <string name="unknown_items">I don\'t recognize yet: %1$s. I won\'t use it to find recipes.</string>
 
     <string name="minutes">%1$d min</string>
     <string name="match_ready">You have everything · uses %1$d of your items</string>
