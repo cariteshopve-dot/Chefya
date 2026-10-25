@@ -5,10 +5,10 @@ object Ingredients {
 
     val all: List<Ingredient> = listOf(
         Ingredient("huevo", Text("Huevos", "Eggs"), listOf("huevo", "egg")),
-        Ingredient("tomate", Text("Tomate", "Tomato"), listOf("jitomate")),
-        Ingredient("cebolla", Text("Cebolla", "Onion")),
-        Ingredient("ajo", Text("Ajo", "Garlic")),
-        Ingredient("pimenton", Text("Pimentón", "Bell pepper"), listOf("pimiento", "aji dulce", "chile morron", "morron", "pepper")),
+        Ingredient("tomate", Text("Tomate", "Tomato"), listOf("jitomate"), seasoning = true),
+        Ingredient("cebolla", Text("Cebolla", "Onion"), seasoning = true),
+        Ingredient("ajo", Text("Ajo", "Garlic"), seasoning = true),
+        Ingredient("pimenton", Text("Pimentón", "Bell pepper"), listOf("pimiento", "aji dulce", "chile morron", "morron", "pepper"), seasoning = true),
         Ingredient("arroz", Text("Arroz", "Rice")),
         Ingredient("pasta", Text("Pasta", "Pasta"), listOf("espaguetis", "espagueti", "fideos", "spaghetti", "noodles", "macarrones")),
         Ingredient("harina_maiz", Text("Harina de maíz", "Corn flour"), listOf("harina pan", "harina precocida", "masa de maiz", "masarepa", "cornmeal")),
@@ -19,6 +19,8 @@ object Ingredients {
         Ingredient("leche", Text("Leche", "Milk")),
         Ingredient("mantequilla", Text("Mantequilla", "Butter"), listOf("margarina", "manteca")),
         Ingredient("pollo", Text("Pollo", "Chicken"), listOf("pechuga", "muslos de pollo")),
+        Ingredient("carne_res", Text("Carne de res", "Beef"), listOf("carne", "res", "bistec", "bisteck", "filete de res", "steak")),
+        Ingredient("pescado", Text("Pescado", "Fish"), listOf("filete de pescado", "merluza", "tilapia", "fish")),
         Ingredient("carne_molida", Text("Carne molida", "Ground beef"), listOf("carne picada", "molida")),
         Ingredient("salchicha", Text("Salchichas", "Sausages"), listOf("vienesas", "hot dog")),
         Ingredient("jamon", Text("Jamón", "Ham")),
@@ -28,13 +30,15 @@ object Ingredients {
         Ingredient("papa", Text("Papas", "Potatoes"), listOf("patata", "potato")),
         Ingredient("platano", Text("Plátano", "Plantain"), listOf("platano verde", "platano maduro")),
         Ingredient("yuca", Text("Yuca", "Cassava"), listOf("mandioca", "casava")),
-        Ingredient("zanahoria", Text("Zanahoria", "Carrot")),
+        Ingredient("zanahoria", Text("Zanahoria", "Carrot"), seasoning = true),
         Ingredient("aguacate", Text("Aguacate", "Avocado"), listOf("palta")),
-        Ingredient("limon", Text("Limón", "Lime"), listOf("lima", "lemon")),
-        Ingredient("cilantro", Text("Cilantro", "Cilantro"), listOf("culantro", "coriander")),
+        Ingredient("limon", Text("Limón", "Lime"), listOf("lima", "lemon"), seasoning = true),
+        Ingredient("cilantro", Text("Cilantro", "Cilantro"), listOf("culantro", "coriander"), seasoning = true),
         Ingredient("avena", Text("Avena", "Oats"), listOf("oatmeal")),
         Ingredient("banana", Text("Cambur", "Banana"), listOf("guineo", "banano", "platano de seda")),
         Ingredient("arvejas", Text("Arvejas", "Peas"), listOf("guisantes", "chicharos", "petit pois")),
+        Ingredient("lechuga", Text("Lechuga", "Lettuce")),
+        Ingredient("pepino", Text("Pepino", "Cucumber")),
         Ingredient("maiz", Text("Maíz", "Corn"), listOf("jojoto", "choclo", "elote", "maiz dulce")),
         Ingredient("sal", Text("Sal", "Salt"), staple = true),
         Ingredient("aceite", Text("Aceite", "Oil"), staple = true),
@@ -45,17 +49,26 @@ object Ingredients {
 
     private val byId: Map<String, Ingredient> = all.associateBy { it.id }
 
-    /** Cada nombre conocido, ya normalizado, apuntando a su ingrediente. */
+    /**
+     * Cada nombre conocido, ya normalizado, apuntando a su ingrediente. Se guarda también en
+     * singular, para que "frijol" encuentre "frijoles".
+     */
     private val byName: Map<String, Ingredient> = buildMap {
         for (ingredient in all) {
-            val names = listOf(ingredient.id.replace('_', ' '), ingredient.name.es, ingredient.name.en) + ingredient.aliases
+            val names = listOf(ingredient.name.es, ingredient.name.en) + ingredient.aliases + ingredient.id.replace('_', ' ')
             for (name in names) putIfAbsent(normalize(name), ingredient)
+        }
+        for (ingredient in all) {
+            val names = listOf(ingredient.name.es, ingredient.name.en) + ingredient.aliases
+            for (name in names) singularForms(normalize(name)).drop(1).filter { it.length >= 3 }.forEach { putIfAbsent(it, ingredient) }
         }
     }
 
     fun byId(id: String): Ingredient? = byId[id]
 
     fun isStaple(id: String): Boolean = byId[id]?.staple == true
+
+    fun isSeasoning(id: String): Boolean = byId[id]?.seasoning == true
 
     /** El ingrediente que corresponde a lo que alguien escribió, aceptando plurales y sin acentos. */
     fun find(raw: String): Ingredient? {

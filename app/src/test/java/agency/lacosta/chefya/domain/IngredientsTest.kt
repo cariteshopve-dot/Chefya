@@ -23,6 +23,12 @@ class IngredientsTest {
         assertEquals("platano", Ingredients.find("plátano")?.id)
         assertEquals("banana", Ingredients.find("cambur")?.id)
         assertEquals("huevo", Ingredients.find("eggs")?.id)
+        assertEquals("caraotas", Ingredients.find("frijol")?.id)
+        assertEquals("caraotas", Ingredients.find("caraota")?.id)
+        assertEquals("carne_res", Ingredients.find("Carne")?.id)
+        assertEquals("carne_molida", Ingredients.find("carne molida")?.id)
+        assertEquals("pescado", Ingredients.find("pescado")?.id)
+        assertEquals("lentejas", Ingredients.find("lenteja")?.id)
     }
 
     @Test
@@ -40,6 +46,12 @@ class IngredientsTest {
         assertEquals("huevo", item.key)
         assertEquals(item, PantryItem.fromKey("huevo"))
         assertNull(PantryItem.fromKey("no-existe"))
+    }
+
+    @Test
+    fun customItemsSavedBeforeAreRecognizedNow() {
+        assertEquals("carne_res", PantryItem.fromKey("custom:carne")?.key)
+        assertEquals("custom:salsa de soya", PantryItem.fromKey("custom:salsa de soya")?.key)
     }
 
     @Test

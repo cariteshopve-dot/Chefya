@@ -7,6 +7,8 @@ import org.junit.Test
 
 class MatcherTest {
 
+    private fun ids(vararg pantry: String) = Matcher.suggest(pantry.toSet()).map { it.recipe.id }
+
     @Test
     fun staplesNeverCountAsMissing() {
         val perico = Recipes.byId("perico")!!
@@ -16,26 +18,40 @@ class MatcherTest {
     }
 
     @Test
-    fun readyRecipesComeFirstUsingMoreOfThePantry() {
-        val result = Matcher.suggest(setOf("huevo", "tomate", "cebolla", "tortilla", "queso"))
-        val ready = result.takeWhile { it.ready }.map { it.recipe.id }
-        assertEquals(listOf("huevos_rancheros", "perico", "quesadillas"), ready)
-        assertTrue(result.all { it.missing.size <= Matcher.MAX_MISSING })
+    fun seasoningAloneSuggestsNothing() {
+        // Antes, tener cebolla o limón bastaba para sugerir perico o yuca con mojo.
+        assertTrue(ids("cebolla").isEmpty())
+        assertTrue(ids("ajo", "limon", "cebolla", "tomate").isEmpty())
     }
 
     @Test
-    fun betweenEqualMatchesTheFastestWins() {
-        val result = Matcher.suggest(setOf("arroz", "huevo", "cebolla", "zanahoria", "atun", "tomate", "limon"))
-        val ids = result.map { it.recipe.id }
-        // Ensalada de atún (10 min) y arroz frito (20 min) están listas y usan 4 cosas cada una.
-        assertTrue(ids.indexOf("ensalada_atun") < ids.indexOf("arroz_frito"))
+    fun aRecipeNeedsItsMainIngredient() {
+        val result = ids("pasta", "queso", "ajo")
+        assertFalse("yuca_mojo" in result)
+        assertFalse("sandwich_plancha" in result)
+        assertTrue("pasta_atun" in result)
     }
 
     @Test
-    fun recipesThatUseNothingFromThePantryAreHidden() {
-        val result = Matcher.suggest(setOf("avena"))
-        assertFalse(result.any { it.recipe.id == "arepas" })
-        assertTrue(result.any { it.recipe.id == "panquecas_cambur" })
+    fun missingSeasoningIsFineMissingTwoMainsIsNot() {
+        assertEquals(listOf("sopa_lentejas"), ids("lentejas"))
+        // Avena sola: a las dos recetas con avena les faltan dos principales.
+        assertTrue(ids("avena").isEmpty())
+    }
+
+    @Test
+    fun readyRecipesComeFirst() {
+        val result = Matcher.suggest(setOf("huevo", "arroz", "cebolla", "tomate"))
+        assertEquals(setOf("perico", "arroz_huevo"), result.takeWhile { it.ready }.map { it.recipe.id }.toSet())
+        assertTrue(result.all { it.missingMain.size <= Matcher.MAX_MISSING_MAIN })
+    }
+
+    @Test
+    fun recipesWithAllMainsComeBeforeOnesThatNeedShopping() {
+        val result = Matcher.suggest(setOf("pollo", "arroz"))
+        assertEquals("arroz_pollo", result.first().recipe.id)
+        val firstNeedingMain = result.indexOfFirst { it.missingMain.isNotEmpty() }
+        assertTrue(result.drop(firstNeedingMain).all { it.missingMain.isNotEmpty() })
     }
 
     @Test

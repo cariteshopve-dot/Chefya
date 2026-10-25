@@ -21,7 +21,11 @@
     <string name="pantry_empty_hint">Agrega dos o tres cosas que tengas y te muestro qué puedes cocinar. Sal, aceite y agua ya los doy por hechos.</string>
     <string name="can_cook">Puedes cocinar</string>
     <string name="see_all">Ver todas</string>
-    <string name="no_matches">Con eso todavía no sale una receta. Agrega algo más, como arroz, huevos o tomate.</string>
+    <string name="no_matches">Con eso todavía no sale una receta. Agrega algo principal, como arroz, huevos, pollo o caraotas.</string>
+
+    <string name="no_ready">Con lo que tienes todavía falta algo para un plato completo. Mira abajo qué te conviene comprar.</string>
+    <string name="buy_one_more">Si consigues una cosa más</string>
+    <string name="unknown_items">Todavía no reconozco: %1$s. No lo uso para buscar recetas.</string>
 
     <string name="minutes">%1$d min</string>
     <string name="match_ready">Tienes todo · usa %1$d de tus cosas</string>

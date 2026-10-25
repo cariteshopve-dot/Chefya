@@ -260,6 +260,69 @@ object Recipes {
                 t("Escurre la yuca y báñala con el mojo.", "Drain the cassava and pour the mojo over."),
             ),
         ),
+        Recipe(
+            id = "bistec_encebollado",
+            name = t("Bistec encebollado", "Steak with onions"),
+            minutes = 25,
+            ingredients = listOf("carne_res", "cebolla", "ajo", "aceite", "sal"),
+            optional = listOf("tomate", "arroz", "papa"),
+            steps = listOf(
+                t("Sazona la carne con sal, pimienta y ajo machacado.", "Season the beef with salt, pepper and crushed garlic."),
+                t("Dórala en aceite bien caliente, 3 minutos por lado, y sácala.", "Sear it in very hot oil, 3 minutes per side, and set aside."),
+                t("En el mismo sartén cocina la cebolla en aros hasta que esté suave.", "In the same pan cook the onion rings until soft."),
+                t("Devuelve la carne con un chorrito de agua y cocina 5 minutos más.", "Return the beef with a splash of water and cook 5 more minutes."),
+            ),
+        ),
+        Recipe(
+            id = "carne_guisada",
+            name = t("Carne guisada rápida", "Quick beef stew"),
+            minutes = 30,
+            ingredients = listOf("carne_res", "tomate", "cebolla", "pimenton", "ajo", "aceite", "sal"),
+            optional = listOf("papa", "zanahoria", "arroz"),
+            steps = listOf(
+                t("Corta la carne en tiras finas y sálala.", "Cut the beef into thin strips and salt it."),
+                t("Dórala en aceite y sácala.", "Brown it in oil and set aside."),
+                t("Sofríe cebolla, ajo y pimentón; agrega el tomate picado.", "Fry onion, garlic and pepper, then add the chopped tomato."),
+                t("Devuelve la carne con medio vaso de agua y cocina tapado 15 minutos.", "Return the beef with half a glass of water and simmer covered 15 minutes."),
+            ),
+        ),
+        Recipe(
+            id = "pescado_frito",
+            name = t("Pescado frito con limón", "Fried fish with lime"),
+            minutes = 20,
+            ingredients = listOf("pescado", "limon", "ajo", "aceite", "sal"),
+            optional = listOf("harina_trigo", "platano", "lechuga"),
+            steps = listOf(
+                t("Sazona el pescado con sal, ajo machacado y jugo de limón; deja 5 minutos.", "Season the fish with salt, crushed garlic and lime juice; rest 5 minutes."),
+                t("Si tienes harina, pásalo por harina.", "If you have flour, dust it in flour."),
+                t("Fríelo en aceite caliente 4 minutos por lado.", "Fry in hot oil 4 minutes per side."),
+                t("Sirve con más limón.", "Serve with more lime."),
+            ),
+        ),
+        Recipe(
+            id = "ensalada_fresca",
+            name = t("Ensalada fresca", "Fresh salad"),
+            minutes = 10,
+            ingredients = listOf("lechuga", "tomate", "cebolla", "limon", "aceite", "sal"),
+            optional = listOf("pepino", "aguacate", "atun", "maiz"),
+            steps = listOf(
+                t("Lava y corta la lechuga en trozos.", "Wash and tear the lettuce."),
+                t("Agrega tomate y cebolla en rodajas finas.", "Add thinly sliced tomato and onion."),
+                t("Aliña con limón, aceite y sal justo antes de servir.", "Dress with lime, oil and salt just before serving."),
+            ),
+        ),
+        Recipe(
+            id = "arroz_huevo",
+            name = t("Arroz con huevo frito", "Rice with fried egg"),
+            minutes = 25,
+            ingredients = listOf("arroz", "huevo", "aceite", "sal"),
+            optional = listOf("platano", "caraotas", "tomate"),
+            steps = listOf(
+                t("Calienta el arroz ya cocido, o cocina 1 taza con 2 de agua y sal.", "Warm cooked rice, or cook 1 cup with 2 of water and salt."),
+                t("Fríe los huevos en aceite caliente, con la yema blanda.", "Fry the eggs in hot oil, keeping the yolk soft."),
+                t("Sirve el huevo encima del arroz.", "Serve the egg on top of the rice."),
+            ),
+        ),
     )
 
     private val byId = all.associateBy { it.id }

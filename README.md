@@ -8,7 +8,7 @@ Hecho por lacosta.agency.
 
 - **Inicio**: anotas lo que tienes (reconoce nombres de cada país: caraotas, frijoles, porotos…)
   y te muestra las recetas que puedes hacer ya o a las que les faltan una o dos cosas.
-- **Recetas**: 20 recetas incluidas en la app, funcionan sin internet.
+- **Recetas**: 25 recetas incluidas en la app, funcionan sin internet. Una receta solo se sugiere si tienes su ingrediente principal; tener cebolla o ajo no basta.
 - **Receta**: qué tienes y qué te falta, con un botón para mandar lo que falta a Compras.
 - **Compras**: al marcar algo como comprado pasa a tu cocina.
 - **Ajustes**: tema claro u oscuro, plan y crédito.

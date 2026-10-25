@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import agency.lacosta.chefya.domain.PantryItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -55,6 +56,17 @@ class KitchenRepository(context: Context) {
         store.edit {
             it[SHOPPING] = (it[SHOPPING] ?: emptySet()) - key
             it[PANTRY] = (it[PANTRY] ?: emptySet()) + key
+        }
+    }
+
+    /** Reescribe lo guardado con las claves de esta versión, que puede reconocer más ingredientes. */
+    suspend fun upgradeKeys() {
+        store.edit { prefs ->
+            for (key in listOf(PANTRY, SHOPPING)) {
+                val old = prefs[key] ?: continue
+                val new = old.mapNotNullTo(HashSet()) { PantryItem.fromKey(it)?.key }
+                if (new != old) prefs[key] = new
+            }
         }
     }
 
